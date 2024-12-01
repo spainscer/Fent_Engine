@@ -6,4 +6,5 @@ This engine offers some very useful stuff... aksjfhskjdfhkljashjdf;l
 - ShadowMario | Chart Editor, Translation, and Paths.hx
 - ninjamuffin99 and EliteMasterEric | Used a shit ton of code (ofc bc its Base FNF)
 - KadeDev | Used 'Main.hx' Code and other stuff
-- CNE Team | Took some .hx files that are useful
+- CNE Team | Took some .hx files that are useful and their Project.xml
+- ThatRozebudDude | Took Stuff from FPS Plus (mostly their Cache)
