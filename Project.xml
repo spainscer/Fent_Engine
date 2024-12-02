@@ -27,7 +27,7 @@
 	<!-- ____________________________ Window Settings ___________________________ -->
 
 	<!--These window settings apply to all targets-->
-	<window width="1280" height="720" fps="" background="#000000" hardware="true" vsync="false" />
+	<window width="1280" height="720" fps="60" background="#000000" hardware="true" vsync="false" />
 
 	<!--HTML5-specific-->
 	<window if="html5" resizable="true" />
@@ -54,8 +54,8 @@
 	<define name="PRELOAD_ALL" unless="web" />
 	<define name="NO_PRELOAD_ALL" unless="PRELOAD_ALL"/>
 
-	<library name="assets"    preload="true"  if="PRELOAD_ALL"/>
-	<library name="assets"    preload="false" if="NO_PRELOAD_ALL" />
+	<assets path="assets"    preload="true"  if="PRELOAD_ALL"/>
+	<assets path="assets"    preload="false" if="NO_PRELOAD_ALL" />
 
 	<assets path='art/readme.txt' rename='do NOT readme.txt' />
 
@@ -86,6 +86,7 @@
 		<define name="VIDEO_SUPPORT" if="desktop || android" />
 	</section>
 
+	<haxedef name="TRANSLATION_SUPPORT" if="TRANSLATION_SUPPORT" />
 	<haxedef name="VIDEO_SUPPORT" if="VIDEO_SUPPORT" />
 	<haxedef name="MOD_SUPPORT" if="MOD_SUPPORT" />
     <haxedef name="DISCORD_SUPPORT" if="DISCORD_SUPPORT" />
@@ -122,8 +123,6 @@
 	<haxedef name="HXCPP_STACK_TRACE" if="CRASH_HANDLER_SUPPORT" />
 
 	<!-- _________________________________ Additional stuff _______________________________ -->
-	<haxedef name="HXCPP_CHECK_POINTER" if="release" />
-	<haxedef name="HXCPP_STACK_LINE" if="release" />
 	<haxedef name="HXCPP_DEBUG_LINK" if="release" />
 	<haxedef name="HXCPP_CATCH_SEGV" />
 

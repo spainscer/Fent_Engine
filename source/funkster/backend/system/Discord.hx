@@ -21,13 +21,13 @@ class DiscordClient
 
 	public static function check()
 	{
-		if(ClientPrefs.data.discordRPC) initialize();
-		else if(isInitialized) shutdown();
+		/*if(ClientPrefs.data.discordRPC)*/ initialize();
+		/*else*/ if(isInitialized) shutdown();
 	}
 	
 	public static function prepare()
 	{
-		if (!isInitialized && ClientPrefs.data.discordRPC)
+		if (!isInitialized /*&& ClientPrefs.data.discordRPC*/)
 			initialize();
 
 		Application.current.window.onClose.add(function() {
@@ -165,7 +165,7 @@ class DiscordClient
 	#end
 }
 
-@:allow(backend.DiscordClient)
+@:allow(funkster.backend.system.DiscordClient)
 private final class DiscordPresence
 {
 	public var state(get, set):String;

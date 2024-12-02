@@ -34,4 +34,10 @@ class CoolUtil
             
         return dumbArray;
     }
+
+    @:access(flixel.util.FlxSave.validate)
+	inline public static function getSavePath():String {
+		final company:String = FlxG.stage.application.meta.get('company');
+		return '${company}/${flixel.util.FlxSave.validate(FlxG.stage.application.meta.get('file'))}';
+	}
 }

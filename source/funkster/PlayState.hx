@@ -1,9 +1,12 @@
 package funkster;
 
-class PlayState {
+import flixel.FlxState;
+
+class PlayState extends FlxState {
     public function new()
     {
-        trace('hi');
+        var sprite:FlxSprite = new FlxSprite().loadGraphic(Paths.image('game/ui/notes/skin/Default'));
+        add(sprite);
         super();
     }
 }

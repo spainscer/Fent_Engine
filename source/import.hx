@@ -12,15 +12,15 @@ import js.html.*;
 #end
 
 import Paths;
-// import funkster.backend.util.Controls;
-// import funkster.backend.util.CoolUtil;
+import funkster.backend.util.Controls;
+import funkster.backend.util.CoolUtil;
 // import funkster.menus.MusicBeatState;
 // import funkster.menus.submenus.MusicBeatSubstate;
 // import funkster.backend.Options;
 // import funkster.backend.util.Conductor;
 // import funkster.objects.stages.BaseStage;
 // import funkster.backend.Difficulty;
-// import funkster.backend.languages.Language;
+import funkster.backend.system.languages.Language;
 
 // import funkster.objects.Alphabet;
 // import funkster.objects.BGSprite;
