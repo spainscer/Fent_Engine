@@ -57,12 +57,9 @@
 	<library name="assets"    preload="true"  if="PRELOAD_ALL"/>
 	<library name="assets"    preload="false" if="NO_PRELOAD_ALL" />
 
-	<assets path='mods' embed='false'/>
 	<assets path='art/readme.txt' rename='do NOT readme.txt' />
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
-
-	<haxeflag name="--macro" value="funkin.backend.system.macros.NewHaxeWarning.warn()" />
 
 	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
 
@@ -78,18 +75,32 @@
 
 	<!-- _________________________________ Engine Settings _______________________________ -->
 	<section if="cpp">
-		<define name="DISCORD_RPC" if="desktop"/>
+		<define name="DISCORD_SUPPORT" if="desktop"/>
 	</section>
+
+	<define name="CRASH_HANDLER_SUPPORT" if="desktop"/>
 
 	<haxedef name="MOD_SUPPORT" unless="web"/>
 
 	<section if="cpp">
-		<define name="VIDEO_CUTSCENES" if="desktop || android" />
+		<define name="VIDEO_SUPPORT" if="desktop || android" />
 	</section>
 
-	<haxedef name="VIDEO_CUTSCENES" if="VIDEO_CUTSCENES" />
+	<haxedef name="VIDEO_SUPPORT" if="VIDEO_SUPPORT" />
 	<haxedef name="MOD_SUPPORT" if="MOD_SUPPORT" />
-    <haxedef name="DISCORD_RPC" if="DISCORD_RPC" />
+    <haxedef name="DISCORD_SUPPORT" if="DISCORD_SUPPORT" />
+	<haxedef name="CRASH_HANDLER_SUPPORT" if="CRASH_HANDLER_SUPPORT" />
+
+	<section>
+    	<xsl:choose>
+        	<xsl:when test="MOD_SUPPORT">
+            	<assets path="mods" embed="false"/>
+        	</xsl:when>
+        	<xsl:otherwise>
+            	<assets path="mods" embed="true"/>
+        	</xsl:otherwise>
+    	</xsl:choose>
+	</section>
 
 	<!-- _______________________________ Libraries ______________________________ -->
 
@@ -98,13 +109,17 @@
 	<haxelib name="flixel" />
 	<haxelib name="flixel-addons" />
 
-	<haxelib name="hxvlc" if="VIDEO_CUTSCENES" />
+	<haxelib name="hxvlc" if="VIDEO_SUPPORT" />
 	<haxelib name="format" />
 	<haxelib name="flxanimate" />
 
-	<haxelib name="hscript-improved" />
-	<haxelib name="hxdiscord_rpc" if="DISCORD_RPC"/>
+	<haxelib name="hxdiscord_rpc" if="DISCORD_SUPPORT"/>
 	<haxelib name="markdown" />
+
+	<!--Used for Izzy Engine's crash handler-->
+	<haxedef name="HXCPP_CHECK_POINTER" if="CRASH_HANDLER_SUPPORT" />
+	<haxedef name="HXCPP_STACK_LINE" if="CRASH_HANDLER_SUPPORT" />
+	<haxedef name="HXCPP_STACK_TRACE" if="CRASH_HANDLER_SUPPORT" />
 
 	<!-- _________________________________ Additional stuff _______________________________ -->
 	<haxedef name="HXCPP_CHECK_POINTER" if="release" />
