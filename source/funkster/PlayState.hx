@@ -1,12 +1,11 @@
 package funkster;
 
-import flixel.FlxState;
-
-class PlayState extends FlxState {
+class PlayState {
     public function new()
     {
-        var sprite:FlxSprite = new FlxSprite().loadGraphic(Paths.image('game/ui/notes/skin/Default'));
-        add(sprite);
+        // var sprite:FlxSprite = new FlxSprite().loadGraphic(Paths.image('game/ui/notes/skin/Default'));
+        // add(sprite);
         super();
+        trace('gyatt');
     }
 }

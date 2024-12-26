@@ -43,22 +43,22 @@ class Main extends Sprite {
     //public static var fpsVar: FPSCounter;
 
     public static function main(): Void {
-        Lib.current.addChild(new Main());
-    }
+    Lib.current.addChild(new Main());
+  }
 
     public function new() {
-        super();
+    super();
         stage != null ? init() : addEventListener(Event.ADDED_TO_STAGE, init);
 
-        #if VIDEOS_ALLOWED
+        #if VIDEO_SUPPORT
         hxvlc.util.Handle.init(#if (hxvlc >= "1.8.0") ['--no-lua'] #end);
         #end
     }
 
     private function init(e: Event = null): Void {
-        removeEventListener(Event.ADDED_TO_STAGE, init);
-        setupGame();
-    }
+      removeEventListener(Event.ADDED_TO_STAGE, init);
+    setupGame();
+  }
 
     private function setupGame(): Void {
         adjustGameDimensions();
@@ -114,15 +114,15 @@ class Main extends Sprite {
 
         configureFlxG();
 
-        #if DISCORD_ALLOWED
+        #if DISCORD_SUPPORT
         DiscordClient.prepare();
         #end
 
         FlxG.signals.gameResized.add(handleGameResize);
 
-        // #if CRASH_HANDLER_SUPPORT
-        // Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
-        // #end
+        #if CRASH_HANDLER_SUPPORT
+        Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
+        #end
     }
 
     // private function setupDesktopFeatures(): Void {
@@ -161,55 +161,48 @@ class Main extends Sprite {
         }
     }
 
-    	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!
+  // Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!
 	// very cool person for real they don't get enough credit for their work
-	// #if CRASH_HANDLER
-	// function onCrash(e:UncaughtErrorEvent):Void
-	// {
-	// 	var errMsg:String = "";
-	// 	var path:String;
-	// 	var callStack:Array<StackItem> = CallStack.exceptionStack(true);
-	// 	var dateNow:String = Date.now().toString();
+	#if CRASH_HANDLER_SUPPORT
+	function onCrash(e:UncaughtErrorEvent):Void
+	{
+		var errMsg:String = "";
+		var path:String;
+		var callStack:Array<StackItem> = CallStack.exceptionStack(true);
+		var dateNow:String = Date.now().toString();
 
-	// 	dateNow = dateNow.replace(" ", "_");
-	// 	dateNow = dateNow.replace(":", "'");
+		dateNow = dateNow.replace(" ", "_");
+		dateNow = dateNow.replace(":", "'");
 
-	// 	path = "./crash/" + "FentEngine_" + dateNow + ".txt";
+		path = "./crash/" + "FentEngine_" + dateNow + ".txt";
 
-	// 	for (stackItem in callStack)
-	// 	{
-	// 		switch (stackItem)
-	// 		{
-	// 			case FilePos(s, file, line, column):
-	// 				errMsg += file + " (line " + line + ")\n";
-	// 			default:
-	// 				Sys.println(stackItem);
-	// 		}
-	// 	}
+		for (stackItem in callStack)
+		{
+			switch (stackItem)
+			{
+				case FilePos(s, file, line, column):
+					errMsg += file + " (line " + line + ")\n";
+				default:
+					Sys.println(stackItem);
+			}
+		}
 
-	// 	errMsg += "\nUncaught Error: " + e.error;
-	// 	/*
-	// 	 * remove if you're modding and want the crash log message to contain the link
-	// 	 * please remember to actually modify the link for the github page to report the issues to.
-	// 	*/
-	// 	// 
-	// 	#if officialBuild
-	// 	errMsg += "\nPlease report this error to the GitHub page: https://github.com/spainscer/Fent_Engine/issues\n\n> Crash Handler written by: sqirra-rng";
-	// 	#end
+		errMsg += "\nUncaught Error: " + e.error;
+    errMsg += "\nPlease report this error to the GitHub page: https://github.com/spainscer/Fent_Engine/issues\n\n> Crash Handler written by: sqirra-rng";
 
-	// 	if (!FileSystem.exists("./crash/"))
-	// 		FileSystem.createDirectory("./crash/");
+		if (!FileSystem.exists("./crash/"))
+			FileSystem.createDirectory("./crash/");
 
-	// 	File.saveContent(path, errMsg + "\n");
+		File.saveContent(path, errMsg + "\n");
 
-	// 	Sys.println(errMsg);
-	// 	Sys.println("Crash dump saved in " + Path.normalize(path));
+		Sys.println(errMsg);
+		Sys.println("Crash dump saved in " + Path.normalize(path));
 
-	// 	Application.current.window.alert(errMsg, "Error!");
-	// 	#if DISCORD_ALLOWED
-	// 	DiscordClient.shutdown();
-	// 	#end
-	// 	Sys.exit(1);
-	// }
-	// #end
+		Application.current.window.alert(errMsg, "Error!");
+		#if DISCORD_SUPPORT
+		DiscordClient.shutdown();
+		#end
+		Sys.exit(1);
+	}
+	#end
 }
